@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component
 @Component
 class Conversor() {
 
-    fun toConvert(form: TelephoneNumberForm): TelephoneNumber {
-        val entity = TelephoneNumber()
+    fun toConvert(form: PhoneNumberForm): PhoneNumber {
+        val entity = PhoneNumber()
         entity.ddd = form.ddd
         entity.number = form.number
 
