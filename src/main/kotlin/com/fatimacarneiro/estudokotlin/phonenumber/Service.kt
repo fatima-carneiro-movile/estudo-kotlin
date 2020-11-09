@@ -24,15 +24,13 @@ class Service(
         }
     }
 
-    fun getAll(): MutableList<View> {
-        val views = mutableListOf<View>()
-        dao.findAll().forEach {
-            views.add(conversor.toConvertEntityInView(it))
+    fun getAll(): List<View> {
+        return dao.findAll().map {
+            conversor.toConvertEntityInView(it)
         }
-        return views
     }
 
-    fun findByDDD(ddd: Int) = getByDDD(ddd).let {
+    fun findByDDD(ddd: Int): View = getByDDD(ddd).let {
         conversor.toConvertEntityInView(it.get())
     }
 

@@ -13,7 +13,7 @@ class Controller(var service: Service) {
     }
 
     @GetMapping
-    fun getAll(): MutableList<View> {
+    fun getAll(): List<View> {
         return service.getAll()
     }
 
