@@ -6,13 +6,12 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class Service(
-        val dao: Dao,
-        val conversor: Conversor
+        val dao: Dao
 ) {
 
     @Transactional
     fun save(form: PhoneNumberForm) {
-        val entity: PhoneNumber = conversor.toConvertFormInEntity(form)
+        val entity: PhoneNumber = form.toEntity()
         if (!validPrefix(form.ddd)) throw DDDException("Invalid prefix")
 
         dao.save(entity)
@@ -26,12 +25,22 @@ class Service(
 
     fun getAll(): List<View> {
         return dao.findAll().map {
-            conversor.toConvertEntityInView(it)
+            it.toView()
         }
     }
 
-    fun findByDDD(ddd: Int): View = getByDDD(ddd).let {
-        conversor.toConvertEntityInView(it.get())
+    fun findByDDD(ddd: Int): View = getByDDD(ddd).get().toView()
+
+    private fun PhoneNumberForm.toEntity(): PhoneNumber {
+        val entity = PhoneNumber()
+        entity.ddd = this.ddd
+        entity.number = this.number
+
+        return entity
+    }
+
+    private fun PhoneNumber.toView(): View {
+        return View(this.ddd, this.number)
     }
 
     private fun getByDDD(ddd: Int) = dao.findByDDD(ddd).stream().findFirst()
