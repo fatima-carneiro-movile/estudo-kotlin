@@ -18,23 +18,6 @@ class Service(
         dao.save(entity)
     }
 
-//    fun save(form: PhoneNumberForm) =
-//            with(conversor.toConvertFormInEntity(form)) {
-//                this.takeIf {
-//                    validPrefix(it.ddd)
-//                }?.let {
-//                    dao.save(it)
-//                } ?: throw DDDException("Invalid prefix")
-//            }
-
-//    fun save(form: PhoneNumberForm) =
-//            with(conversor.toConvertFormInEntity(form)) {
-//                if (!validPrefix(this.ddd))
-//                    throw DDDException("Invalid prefix")
-//                dao.save(this)
-//            }
-
-
     fun validPrefix(dddForm: Int): Boolean {
         return DDD.values().asList().stream().anyMatch { ddd ->
             ddd.prefix == dddForm
