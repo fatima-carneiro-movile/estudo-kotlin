@@ -19,6 +19,6 @@ class Controller(var service: Service) {
 
     @GetMapping("/{ddd}")
     fun getUsingDDD(@PathVariable("ddd") ddd: Int): View {
-        return service.findyByDDD(ddd)
+        return service.findByDDD(ddd)
     }
 }

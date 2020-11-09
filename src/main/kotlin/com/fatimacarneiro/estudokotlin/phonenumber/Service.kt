@@ -49,7 +49,7 @@ class Service(
         return views
     }
 
-    fun findyByDDD(ddd: Int) = getByDDD(ddd).let {
+    fun findByDDD(ddd: Int) = getByDDD(ddd).let {
         conversor.toConvertEntityInView(it.get())
     }
 
