@@ -30,6 +30,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.apache.kafka:kafka-streams")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation ("mysql:mysql-connector-java:6.0.6")
+
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
