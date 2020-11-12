@@ -17,6 +17,10 @@ class Service(
         dao.save(entity)
     }
 
+//    fun sendToKakfa(phoneNumber: PhoneNumber) {
+//        producerControllerKafka.produceMessage(phoneNumber)
+//    }
+
     fun validPrefix(dddForm: Int): Boolean {
         return DDD.values().asList().stream().anyMatch { ddd ->
             ddd.prefix == dddForm
@@ -32,11 +36,7 @@ class Service(
     fun findByDDD(ddd: Int): View = getByDDD(ddd).get().toView()
 
     private fun PhoneNumberForm.toEntity(): PhoneNumber {
-        val entity = PhoneNumber()
-        entity.ddd = this.ddd
-        entity.number = this.number
-
-        return entity
+        return PhoneNumber(this.ddd, this.number)
     }
 
     private fun PhoneNumber.toView(): View {

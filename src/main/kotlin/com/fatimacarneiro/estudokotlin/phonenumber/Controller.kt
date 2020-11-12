@@ -3,8 +3,7 @@ package com.fatimacarneiro.estudokotlin.phonenumber
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@RestController
-@RequestMapping("/api/phonenumber")
+@RestController("/api/phonenumber")
 class Controller(var service: Service) {
 
     @PostMapping
