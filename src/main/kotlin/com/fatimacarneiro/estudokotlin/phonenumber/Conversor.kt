@@ -6,11 +6,7 @@ import org.springframework.stereotype.Component
 class Conversor {
 
     fun toConvertFormInEntity(form: PhoneNumberForm): PhoneNumber {
-        val entity = PhoneNumber()
-        entity.ddd = form.ddd
-        entity.number = form.number
-
-        return entity
+        return PhoneNumber(0, form.ddd, form.number)
     }
 
     fun toConvertEntityInView(entity: PhoneNumber) = View(

@@ -23,24 +23,29 @@ repositories {
 }
 
 dependencies {
+	//spring boot
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
-	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+	//spring kafka
+	implementation("org.springframework.kafka:spring-kafka")
+
+	//jackson
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.apache.kafka:kafka-streams")
+
+	//jetbrains
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.springframework.kafka:spring-kafka")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	//apache
+	implementation("org.apache.kafka:kafka-streams")
+
+	//mysql
 	implementation ("mysql:mysql-connector-java:6.0.6")
 
-	compileOnly("org.projectlombok:lombok")
-	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
