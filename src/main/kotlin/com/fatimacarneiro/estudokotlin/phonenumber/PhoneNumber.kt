@@ -6,11 +6,10 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class PhoneNumber {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    var id: Int = 0
-    var ddd: Int = 0
-    var number: Long = 0
-}
+class PhoneNumber(
+        @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        var id: Int,
+        var ddd: Int,
+        var number: Long
+)
