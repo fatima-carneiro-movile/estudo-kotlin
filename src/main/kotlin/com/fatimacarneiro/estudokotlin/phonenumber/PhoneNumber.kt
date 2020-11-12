@@ -9,7 +9,7 @@ import javax.persistence.Id
 class PhoneNumber(
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        var id: Int,
+        var id: Int = 0,
         var ddd: Int,
         var number: Long
 )

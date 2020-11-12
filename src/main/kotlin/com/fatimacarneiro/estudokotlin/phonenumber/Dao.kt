@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 interface Dao : CrudRepository<PhoneNumber, Int> {
 
     @Query(value = "SELECT pn FROM PhoneNumber pn WHERE pn.ddd = :ddd")
-    fun findByDDD(ddd: Int): MutableList<PhoneNumber>
+    fun findByDDD(ddd: Int): List<PhoneNumber>
 }
