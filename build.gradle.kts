@@ -42,6 +42,8 @@ dependencies {
 
 	//apache
 	implementation("org.apache.kafka:kafka-streams")
+	implementation("org.apache.kafka:kafka-clients")
+
 
 	//mysql
 	implementation ("mysql:mysql-connector-java:6.0.6")

@@ -15,6 +15,7 @@ class Service(
         if (!validPrefix(form.ddd)) throw DDDException("Invalid prefix")
 
         dao.save(entity)
+        producer(entity)
     }
 
     fun validPrefix(dddForm: Int): Boolean {
