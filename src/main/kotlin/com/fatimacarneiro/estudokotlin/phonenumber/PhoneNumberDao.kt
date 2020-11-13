@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface Dao : CrudRepository<PhoneNumber, Int> {
+interface PhoneNumberDao : CrudRepository<PhoneNumber, Int> {
 
     @Query(value = "SELECT pn FROM PhoneNumber pn WHERE pn.ddd = :ddd")
     fun findByDDD(ddd: Int): List<PhoneNumber>

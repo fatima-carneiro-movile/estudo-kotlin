@@ -1,6 +1,6 @@
 package com.fatimacarneiro.estudokotlin.phonenumber
 
-data class View(
+data class PhoneNumberView(
         var ddd: Int,
         var number: Long
 )

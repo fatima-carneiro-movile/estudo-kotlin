@@ -5,7 +5,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/phonenumber")
-class Controller(var service: Service) {
+class PhoneNumberController(var service: PhoneNumberService) {
 
     @PostMapping
     fun save(@Valid @RequestBody form: PhoneNumberForm) {
@@ -13,12 +13,12 @@ class Controller(var service: Service) {
     }
 
     @GetMapping
-    fun getAll(): List<View> {
+    fun getAll(): List<PhoneNumberView> {
         return service.getAll()
     }
 
     @GetMapping("/{ddd}")
-    fun getUsingDDD(@PathVariable("ddd") ddd: Int): View {
+    fun getUsingDDD(@PathVariable("ddd") ddd: Int): PhoneNumberView {
         return service.findByDDD(ddd)
     }
 }

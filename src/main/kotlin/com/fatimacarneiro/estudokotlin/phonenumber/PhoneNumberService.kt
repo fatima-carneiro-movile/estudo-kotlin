@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class Service(
-        val dao: Dao
+class PhoneNumberService(
+        val phoneNumberDao: PhoneNumberDao
 ) {
 
     @Transactional
@@ -14,7 +14,7 @@ class Service(
         val entity: PhoneNumber = form.toEntity()
         if (!validPrefix(form.ddd)) throw DDDException("Invalid prefix")
 
-        dao.save(entity)
+        phoneNumberDao.save(entity)
         producer(entity)
     }
 
@@ -24,21 +24,21 @@ class Service(
         }
     }
 
-    fun getAll(): List<View> {
-        return dao.findAll().map {
+    fun getAll(): List<PhoneNumberView> {
+        return phoneNumberDao.findAll().map {
             it.toView()
         }
     }
 
-    fun findByDDD(ddd: Int): View = getByDDD(ddd).get().toView()
+    fun findByDDD(ddd: Int): PhoneNumberView = getByDDD(ddd).get().toView()
 
-    private fun PhoneNumber.toView(): View {
-        return View(ddd, number)
+    private fun PhoneNumber.toView(): PhoneNumberView {
+        return PhoneNumberView(ddd, number)
     }
 
     private fun PhoneNumberForm.toEntity(): PhoneNumber {
         return PhoneNumber(0, ddd, number)
     }
 
-    private fun getByDDD(ddd: Int) = dao.findByDDD(ddd).stream().findFirst()
+    private fun getByDDD(ddd: Int) = phoneNumberDao.findByDDD(ddd).stream().findFirst()
 }
