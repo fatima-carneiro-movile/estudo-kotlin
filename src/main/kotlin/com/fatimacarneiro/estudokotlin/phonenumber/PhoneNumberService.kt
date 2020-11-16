@@ -1,27 +1,21 @@
 package com.fatimacarneiro.estudokotlin.phonenumber
 
-import com.fatimacarneiro.estudokotlin.DDDException
+import com.fatimacarneiro.estudokotlin.kafka.PhoneNumberProducer
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PhoneNumberService(
-        val phoneNumberDao: PhoneNumberDao
+        val phoneNumberDao: PhoneNumberDao,
+        val phoneNumberProducer: PhoneNumberProducer
 ) {
 
     @Transactional
     fun save(form: PhoneNumberForm) {
         val entity: PhoneNumber = form.toEntity()
-        if (!validPrefix(form.ddd)) throw DDDException("Invalid prefix")
-
+        validPrefix(form.ddd)
         phoneNumberDao.save(entity)
-        producer(entity)
-    }
-
-    fun validPrefix(dddForm: Int): Boolean {
-        return DDD.values().asList().stream().anyMatch { ddd ->
-            ddd.prefix == dddForm
-        }
+        phoneNumberProducer.producer(entity)
     }
 
     fun getAll(): List<PhoneNumberView> {

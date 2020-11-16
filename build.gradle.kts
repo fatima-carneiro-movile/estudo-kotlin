@@ -48,6 +48,9 @@ dependencies {
 	//mysql
 	implementation ("mysql:mysql-connector-java:6.0.6")
 
+	//google
+	implementation("com.google.code.gson:gson:2.6")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

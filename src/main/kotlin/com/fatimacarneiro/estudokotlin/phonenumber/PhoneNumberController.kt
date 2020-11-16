@@ -5,7 +5,9 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/phonenumber")
-class PhoneNumberController(var service: PhoneNumberService) {
+class PhoneNumberController(
+        var service: PhoneNumberService
+) {
 
     @PostMapping
     fun save(@Valid @RequestBody form: PhoneNumberForm) {
