@@ -1,43 +1,23 @@
 package com.fatimacarneiro.estudokotlin.kafka
 
-import com.fatimacarneiro.estudokotlin.phonenumber.PhoneNumber
-import org.apache.kafka.clients.producer.KafkaProducer
-import org.apache.kafka.clients.producer.ProducerConfig
-import org.apache.kafka.clients.producer.ProducerRecord
-import org.apache.kafka.common.serialization.StringSerializer
-import org.springframework.stereotype.Repository
-import java.util.*
 
-import com.google.gson.Gson
+import com.fatimacarneiro.estudokotlin.phonenumber.PhoneNumber
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.stereotype.Repository
 
 @Repository
-class PhoneNumberProducer {
+class PhoneNumberProducer(
+        @Value("\${kafka.topic-name}") val topicName: String,
+        @Autowired val kafkaTemplate: KafkaTemplate<String, String>,
+) {
 
-    fun producer(phoneNumber: PhoneNumber): KafkaProducer<String, String?> {
-        val producer = KafkaProducer<String, String?>(properties())
-        producer.send(record(phoneNumber))
-        return producer
+    fun template(phoneNumber: PhoneNumber): KafkaTemplate<String, String> {
+        val template = kafkaTemplate
+        val json = phoneNumber.toString()
+        template.send(topicName, json)
+        return template
     }
 
-    private fun parseObjetcInJson(phoneNumber: PhoneNumber): String? {
-        val gson = Gson()
-        return gson.toJson(phoneNumber)
-    }
-
-    private fun record(phoneNumber: PhoneNumber): ProducerRecord<String, String?> {
-        val json = parseObjetcInJson(phoneNumber)
-        return ProducerRecord("NEW_PHONE", json)
-    }
-
-    private fun properties(): Properties {
-        val server = "localhost:9092"
-        val stringSerializer: String = StringSerializer::class.java.name
-
-        val properties = Properties()
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, server)
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, stringSerializer)
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, stringSerializer)
-
-        return properties
-    }
 }

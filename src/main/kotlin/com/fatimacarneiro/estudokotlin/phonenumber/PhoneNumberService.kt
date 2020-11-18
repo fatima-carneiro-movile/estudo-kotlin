@@ -15,7 +15,7 @@ class PhoneNumberService(
         val entity: PhoneNumber = form.toEntity()
         validPrefix(form.ddd)
         phoneNumberDao.save(entity)
-        phoneNumberProducer.producer(entity)
+        phoneNumberProducer.template(entity)
     }
 
     fun getAll(): List<PhoneNumberView> {
