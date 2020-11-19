@@ -1,16 +1,23 @@
 package com.fatimacarneiro.estudokotlin.phonenumber
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.serialization.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class PhoneNumber {
+@Serializable
+data class PhoneNumber(
+        @Id
+        @JsonProperty("id")
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        var id: Int = 0,
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    var id: Int = 0
-    var ddd: Int = 0
-    var number: Long = 0
-}
+        @JsonProperty("ddd")
+        var ddd: Int,
+
+        @JsonProperty("number")
+        var number: Long,
+)
