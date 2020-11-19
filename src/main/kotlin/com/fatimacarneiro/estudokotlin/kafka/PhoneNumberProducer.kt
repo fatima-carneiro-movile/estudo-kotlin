@@ -14,10 +14,8 @@ class PhoneNumberProducer(
 ) {
 
     fun template(phoneNumber: PhoneNumber): KafkaTemplate<String, String> {
-        val template = kafkaTemplate
-        val json = phoneNumber.toString()
-        template.send(topicName, json)
-        return template
+        kafkaTemplate.send(topicName, phoneNumber.toString())
+        return kafkaTemplate
     }
 
 }
